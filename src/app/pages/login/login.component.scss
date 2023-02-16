@@ -4,3 +4,33 @@
   align-items: center;
   flex-direction: column;
 }
+
+.spinner {
+  width: 2rem !important;
+}
+
+.matspinner-div {
+  height: 3rem;
+}
+
+.forgotPassword-Or-Register {
+  width: 20rem;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-top: 1.5rem;
+  font-weight: 300;
+}
+
+.font {
+  font-weight: 500;
+  cursor: pointer !important;
+}
+
+.forgotPassword-Or-Register span {
+  cursor: default;
+}
+
+mat-form-field, button {
+  width: 18.75rem !important;
+}
+

@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  userLogin(): Observable<User> {
+  userLogin(login: string, password: string): Observable<User> {
     return this.http.get<User>('./assets/data/authentication/auth-data.json');
   }
 }
