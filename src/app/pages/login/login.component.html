@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div class="col-6"></div>
+  <div class="col-6 default-flex">
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Insert your username" formControlName="login">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Insert your password">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+      <button mat-button color="primary">Login</button>
+      <div *ngIf="loading">
+        <mat-spinner style="width: 30px"></mat-spinner>
+      </div>
+
+    </form>
+  </div>
+
+</div>
