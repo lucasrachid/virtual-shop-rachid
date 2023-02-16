@@ -1,3 +1,19 @@
+.div-login-screen {
+  background-color: #344edf;
+}
+
+.login-div {
+  justify-content: flex-start !important;
+}
+
+.login-div div {
+  height: 30% !important;
+}
+
+.login-div div img {
+  max-width: 12.5rem;
+}
+
 .default-flex {
   display: flex;
   justify-content: center;
@@ -6,7 +22,7 @@
 }
 
 .spinner {
-  width: 2rem !important;
+  width: 1.5rem !important;
 }
 
 .matspinner-div {
@@ -32,5 +48,46 @@
 
 mat-form-field, button {
   width: 18.75rem !important;
+}
+
+div img {
+  max-width: 100%;
+}
+
+@media (max-width: 56.25rem) {
+  .div-login-screen {
+    display: none;
+  }
+
+  .login-div {
+    width: 100%;
+  }
+
+  .matspinner-div {
+    padding-top: 1rem;
+  }
+}
+
+.alternative-login {
+  max-width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.alternative-login img {
+  cursor: pointer;
+}
+
+.alternative-login img:hover {
+  opacity: 0.8;
+}
+
+form {
+  max-height: 35%;
+}
+
+mat-icon {
+  color: #344edf;
 }
 
