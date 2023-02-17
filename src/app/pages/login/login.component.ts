@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import User from "../../models/User";
-import {AuthenticationService} from "../../services/authentication.service";
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import User from '../../models/User';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,11 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   revealedPassword: boolean = false;
   authUser: User = new User();
+
   constructor(private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -34,13 +39,25 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loading = true;
-    console.log(this.formLogin);
-    this.authenticationService.userLogin(this.formLogin.value.login, this.formLogin.value.password).subscribe(response => {
-      console.log(response);
-    });
+    const canAuthenticate = this.validateLoginAndPassword(this.formLogin.value.login, this.formLogin.value.password);
+    if (canAuthenticate) {
+      this.authenticationService.userLogin(this.formLogin.value.login, this.formLogin.value.password).subscribe(response => {
+        setTimeout(() => {
+          this.loading = false;
+          if (this.formLogin.value.login === response.username && this.formLogin.value.password === response.password) {
+            this.router.navigate(['/home']);
+            this.toastr.success('Successfully authenticated');
+          } else {
+            this.toastr.error('Authentication information is incorrect');
+          }
+
+
+        }, 3000);
+      });
+    }
   }
 
-  revealPassword(){
+  revealPassword() {
     let inputPassword = document.getElementById('password');
 
     if (this.revealedPassword) {
@@ -49,6 +66,33 @@ export class LoginComponent implements OnInit {
     } else {
       inputPassword!.setAttribute('type', 'text');
       this.revealedPassword = true;
+    }
+  }
+
+  validateLoginAndPassword(login: string, password: string): boolean | null {
+    let returnError = false;
+    if (login === null || login.length === 0) {
+      this.toastr.error('Username is required')
+      returnError = true;
+    }
+    if (password === null || password.length === 0) {
+      this.toastr.error('Password is required')
+      returnError = true;
+    }
+    if (password.length && password.length <= 5) {
+      this.toastr.error('The password must have at least 5 characters')
+      returnError = true;
+    }
+    if (password.length && password.length > 100) {
+      this.toastr.error('The password must have a maximum of 100 characters')
+      returnError = true;
+    }
+    this.loading = false;
+
+    if (returnError) {
+      return false;
+    } else {
+      return true;
     }
   }
 }
