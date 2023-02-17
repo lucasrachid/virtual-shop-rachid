@@ -43,17 +43,17 @@ export class LoginComponent implements OnInit {
     if (canAuthenticate) {
       this.authenticationService.userLogin(this.formLogin.value.login, this.formLogin.value.password).subscribe(response => {
         setTimeout(() => {
-          this.loading = false;
           if (this.formLogin.value.login === response.username && this.formLogin.value.password === response.password) {
             this.router.navigate(['/home']);
             this.toastr.success('Successfully authenticated');
           } else {
             this.toastr.error('Authentication information is incorrect');
           }
-
-
+          this.loading = false;
         }, 3000);
       });
+    } else {
+      this.loading = false;
     }
   }
 
@@ -87,7 +87,6 @@ export class LoginComponent implements OnInit {
       this.toastr.error('The password must have a maximum of 100 characters')
       returnError = true;
     }
-    this.loading = false;
 
     if (returnError) {
       return false;
