@@ -13,6 +13,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -20,24 +22,26 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     HomeComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      progressBar: true
-    }),
-    AppRoutingModule,
-    RouterOutlet,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatIconModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+            progressBar: true
+        }),
+        AppRoutingModule,
+        RouterOutlet,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatSidenavModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

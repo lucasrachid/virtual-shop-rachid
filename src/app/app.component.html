@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button (click)="opened = !opened">
+      Toggle
+    </button>
+    <h4>Right Click</h4>
+    <button mat-button>
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="side">
+    Start
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
