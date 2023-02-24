@@ -1,33 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Virtual Shop Rachid';
   routeLogin: boolean = false;
   opened: boolean = false;
+  currentRoute: string = '';
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private location: Location) {
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event: any): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+      });
   }
 
   ngOnInit() {
-    // this.validateNavbar();
-
+    this.validateNavbar();
   }
 
   validateNavbar(): void {
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        this.routeLogin = e.url === '/' || e.url === '/login';
-      }
-    });
+    this.routeLogin = this.currentRoute === '' ||
+      this.currentRoute === '/' ||
+      this.currentRoute === '/login';
   }
+
 
 }

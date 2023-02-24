@@ -44,8 +44,9 @@ export class LoginComponent implements OnInit {
       this.authenticationService.userLogin(this.formLogin.value.login, this.formLogin.value.password).subscribe(response => {
         setTimeout(() => {
           if (this.formLogin.value.login === response.username && this.formLogin.value.password === response.password) {
-            this.router.navigate(['/home']);
-            this.toastr.success('Successfully authenticated');
+            this.router.navigate(['/home'])
+              .then(r => this.toastr.success('Successfully authenticated'));
+
           } else {
             this.toastr.error('Authentication information is incorrect');
           }
