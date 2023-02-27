@@ -15,32 +15,40 @@ import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { LogoutSessionComponent } from './components/logout-session/logout-session.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LogoutSessionComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true,
-            progressBar: true
-        }),
-        AppRoutingModule,
-        RouterOutlet,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        MatInputModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatSidenavModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true
+    }),
+    AppRoutingModule,
+    RouterOutlet,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    MatMenuModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

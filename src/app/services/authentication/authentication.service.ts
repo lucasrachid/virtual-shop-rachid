@@ -13,4 +13,8 @@ export class AuthenticationService {
   userLogin(login: string, password: string): Observable<User> {
     return this.http.get<User>('./assets/data/authentication/auth-data.json');
   }
+
+  logOutUser(): void {
+    console.log('Log-out service');
+  }
 }

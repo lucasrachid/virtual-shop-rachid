@@ -1,7 +1,23 @@
+@import "src/assets/scss/color.scss";
+
 mat-sidenav-container {
-  height: calc(205vh - 115vh);
+  height: calc(205vh - 112vh);
 }
 mat-sidenav {
   width: 14rem;
-  background-color: green;
+  //background-color: $primary-color;
+  background-color: rgb(45, 44, 44);
+}
+
+.spacer-sidenav {
+  flex: 1 1 auto;
+}
+
+.display-default {
+  display: flex;
+  align-content: center;
+}
+
+.p-top {
+  padding-top: 10.7%;
 }

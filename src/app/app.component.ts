@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { LogoutSessionComponent } from './components/logout-session/logout-session.component';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +14,9 @@ export class AppComponent implements OnInit {
   routeLogin: boolean = false;
   opened: boolean = false;
   currentRoute: string = '';
+  @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger | undefined;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -22,9 +26,6 @@ export class AppComponent implements OnInit {
   routerEvents() {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
-        console.clear();
-        // * NavigationStart: Navigation starts.
-        console.log('NavigationStart --- ', event.url);
         this.validateNavbar(event.url);
       }
     });
@@ -37,5 +38,11 @@ export class AppComponent implements OnInit {
       this.currentRoute === '/login';
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(LogoutSessionComponent, {restoreFocus: false});
+    dialogRef.afterClosed().subscribe(() => {
+      this.menuTrigger!.focus()
+    });
+  }
 
 }
