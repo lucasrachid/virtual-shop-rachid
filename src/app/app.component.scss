@@ -5,12 +5,22 @@ mat-sidenav-container {
 }
 mat-sidenav {
   width: 14rem;
-  //background-color: $primary-color;
   background-color: rgb(45, 44, 44);
+}
+
+mat-nav-list {
+  h6 {
+    margin: auto 10px;
+  }
 }
 
 .spacer-sidenav {
   flex: 1 1 auto;
+}
+
+.spacer-sidenav-list {
+  flex: 1 1 auto;
+  flex-direction: column;
 }
 
 .display-default {
@@ -20,4 +30,10 @@ mat-sidenav {
 
 .p-top {
   padding-top: 10.7%;
+}
+
+.menu-sidenav {
+  width: 5.625rem;
+  display: flex;
+  justify-content: space-between;
 }
