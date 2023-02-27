@@ -1,1 +1,59 @@
-<router-outlet></router-outlet>
+<div *ngIf="routeLogin; then appLoginComponent else everyComponent"></div>
+<ng-template #appLoginComponent>
+  <router-outlet></router-outlet>
+</ng-template>
+<ng-template #everyComponent>
+  <mat-toolbar color="primary" *ngIf="!routeLogin">
+    <div class="d-flex">
+      <button mat-icon-button (click)="opened = !opened">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="p-top">House Barber</div>
+    </div>
+    <span class="spacer-sidenav"></span>
+    <button mat-icon-button [matMenuTriggerFor]="logout" #menuTrigger>
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <mat-menu #logout="matMenu">
+      <button mat-menu-item (click)="openDialog()">
+        Sign out
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="over">
+      <mat-nav-list>
+        <mat-list-item>
+          <div class="d-flex">
+            <mat-icon class="text-white">home</mat-icon>
+            <h6 class="text-white">Home</h6>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div class="d-flex">
+            <mat-icon class="text-white">description</mat-icon>
+            <h6 class="text-white">Reports</h6>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div class="d-flex">
+            <mat-icon class="text-white">date_range</mat-icon>
+            <h6 class="text-white">Schedules</h6>
+          </div>
+        </mat-list-item>
+        <span class="spacer-sidenav-list"></span>
+        <mat-list-item>
+          <div class="d-flex">
+            <mat-icon class="text-white">settings</mat-icon>
+            <h6 class="text-white">Settings</h6>
+          </div>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import User from '../../models/User';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   formLogin!: FormGroup;
   controlLogin: { [key: string]: AbstractControl } = {};
   loading: boolean = false;
@@ -44,8 +43,9 @@ export class LoginComponent implements OnInit {
       this.authenticationService.userLogin(this.formLogin.value.login, this.formLogin.value.password).subscribe(response => {
         setTimeout(() => {
           if (this.formLogin.value.login === response.username && this.formLogin.value.password === response.password) {
-            this.router.navigate(['/home']);
-            this.toastr.success('Successfully authenticated');
+            this.router.navigate(['/home'])
+              .then(r => this.toastr.success('Successfully authenticated'));
+
           } else {
             this.toastr.error('Authentication information is incorrect');
           }
