@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   formLogin!: FormGroup;
   controlLogin: { [key: string]: AbstractControl } = {};
   loading: boolean = false;

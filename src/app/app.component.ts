@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,18 +13,25 @@ export class AppComponent implements OnInit {
   currentRoute: string = '';
 
   constructor(private router: Router) {
-    this.router.events
-      .pipe(filter((event: any): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentRoute = event.url;
-      });
   }
 
   ngOnInit() {
-    this.validateNavbar();
+    this.routerEvents();
   }
 
-  validateNavbar(): void {
+  routerEvents() {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationStart) {
+        console.clear();
+        // * NavigationStart: Navigation starts.
+        console.log('NavigationStart --- ', event.url);
+        this.validateNavbar(event.url);
+      }
+    });
+  }
+
+  validateNavbar(eventUrl: string): void {
+    this.currentRoute = eventUrl;
     this.routeLogin = this.currentRoute === '' ||
       this.currentRoute === '/' ||
       this.currentRoute === '/login';

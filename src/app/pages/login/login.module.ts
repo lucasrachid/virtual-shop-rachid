@@ -10,18 +10,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [
-    CommonModule,
-    LoginRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot(),
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatIconModule
-  ]
+    declarations: [LoginComponent],
+    exports: [
+        LoginComponent
+    ],
+    imports: [
+        CommonModule,
+        LoginRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatIconModule
+    ]
 })
 export class LoginModule {
 }
