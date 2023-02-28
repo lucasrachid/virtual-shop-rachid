@@ -87,11 +87,6 @@ export class LoginComponent implements OnInit {
       this.toastr.error('The password must have a maximum of 100 characters')
       returnError = true;
     }
-
-    if (returnError) {
-      return false;
-    } else {
-      return true;
-    }
+    return !returnError;
   }
 }
